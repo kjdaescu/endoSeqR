@@ -1,0 +1,10 @@
+Package: endoSeqR
+Type: Package
+Title: Identifies endo-siRNA sequences from small library libraries
+Version: 0.1.0
+Author: Kelly Daescu
+Maintainer: The package maintainer <KellyDaescu@utdallas.edu>
+Description: In addition to identifying endo-siRNA sequences, it also has a visualization feature.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true

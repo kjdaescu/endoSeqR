@@ -1,0 +1,36 @@
+#!/bin/bash
+bowtie  -v 1 -m 4 --best --strata -f -S $1.genomic.index $2.fasta $2.genomic.sam
+samtools view -h $2.genomic.sam | grep -v null | samtools view -bS  > $2.genomic.bam
+samtools view -F 0x04 -b $2.genomic.bam > $2.genomic.mapped.bam
+samtools sort $2.genomic.mapped.bam > $2.genomic.mapped.sorted.bam
+samtools index $2.genomic.mapped.sorted.bam
+bedtools bamtobed -cigar -i $2.genomic.mapped.sorted.bam > $2.genomic.mapped.sorted.bed
+more $2.genomic.mapped.sorted.bed | awk '{print$4}' > $2.genome
+more $2.fasta | sed -n '1~2p' > $2.fasta.ids.txt
+more $2.fasta | sed -n '2~2p' > $2.fasta.sequences.txt
+paste $2.fasta.ids.txt $2.fasta.sequences.txt   > $2.table
+more $2.genome | awk '{print">"$1}' > $2.genome.txt
+more $2.table | fgrep -f $2.genome.txt > $2.genome.table
+tr -s '\t'  '\n' <$2.genome.table> $2.genome.fasta
+bowtie -v $1 -a --best --strata -f -S $1.reference.index $2.genome.fasta $2.rna.reference.sam
+samtools view -h $2.rna.reference.sam | grep -v null | samtools view -bS  > $2.rna.reference.bam
+samtools view -f 0x04 $2.rna.reference.bam | cut -f1 | sort | uniq -c | awk '{print ">"$2}'> $2.unmapped.rna.reference.ids.txt
+samtools view -F 0x04 $2.rna.reference.bam | cut -f1 | sort | uniq -c | awk '{print ">"$2}'> $2.mapped.rna.reference.ids.txt
+more $2.genome.table | fgrep -f $2.unmapped.rna.reference.ids.txt > $2.unknown.rna.table
+tr -s '\t '  '\n' <$2.unknown.rna.table> $2.unknown.rna.fasta
+bowtie -v 1 -a --best --strata -f -S $1.transcriptome.index $2.unknown.rna.fasta $2.transcriptome.sam
+samtools view -h $2.transcriptome.sam | grep -v null | samtools view -bS  > $2.transcriptome.bam
+samtools view -F 0x04 -b $2.transcriptome.bam > $2.transcriptome.mapped.bam
+samtools view -f 16 $2.transcriptome.mapped.bam | cut -f1 | sort | uniq -c | awk '{print">"$2}' > $2.transcriptome.ANTISENSE.ids.txt
+samtools view -F 16 $2.transcriptome.mapped.bam | cut -f1 | sort | uniq -c | awk '{print">"$2}' > $2.transcriptome.SENSE.ids.txt
+more $2.transcriptome.ANTISENSE.ids.txt | fgrep -vf $2.transcriptome.SENSE.ids.txt | cut -f1 | cut -c 2- | sort | uniq -c | awk '{print$2}' > $2.siRNA.ids.txt
+more $2.genomic.mapped.sorted.bed | fgrep -f $2.siRNA.ids.txt > $2.siRNA.bed
+more $2.unknown.rna.table | fgrep -f $2.siRNA.ids.txt > $2.siRNA.fasta.table
+rm *bam
+rm *sam
+rm *bai
+rm *genome*
+rm *unknown*
+rm *ids.txt
+rm *sequences.txt
+exit

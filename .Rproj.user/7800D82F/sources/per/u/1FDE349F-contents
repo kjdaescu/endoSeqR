@@ -1,0 +1,4 @@
+library(knitr)
+library(rmarkdown)
+knitr("endoSeqR_practice.RMD")
+Rscript -e "knitr::stitch_rmd('endoSeqR_practice.Rmd')"
