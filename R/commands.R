@@ -100,7 +100,9 @@ Import_endosiRNA<-function(fasta_file_name){
   sequence2<-unlist(sequence2[,1])
   df$target.mRNA<-sequence2
   save(df,file=paste0(fasta_file_name,"_endosiRNA.RData"))
-  write.xlsx(df,file=paste0(fasta_file_name,"_endosiRNA.xlsx"),colNames=TRUE,rowNames=FALSE)
+  df2<-df[,('Chr','Start','Stop','Read.ID','Strand')]
+  write.xlsx(df,file=paste0(fasta_file_name,"detailed_endosiRNA.xlsx"),colNames=TRUE,rowNames=FALSE)
+  write.xlsx(df2,file=paste0(fasta_file_name,"_endosiRNA_bed.xlsx"),colNames=TRUE,rowNames=FALSE)
   return(df)
 }
 
