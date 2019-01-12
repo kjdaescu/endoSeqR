@@ -1,0 +1,4 @@
+#!/bin/bash
+rm *bed
+rm *table
+exit
