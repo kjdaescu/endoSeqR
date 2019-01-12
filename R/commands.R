@@ -102,6 +102,8 @@ Import_endosiRNA<-function(fasta_file_name){
   save(df,file=paste0(fasta_file_name,"_endosiRNA.RData"))
   write.xlsx(df,file=paste0(fasta_file_name,"detailed_endosiRNA.xlsx"),colNames=TRUE,rowNames=FALSE)
   write.xlsx(bed,file=paste0(fasta_file_name,"_endosiRNA_bed.xlsx"),colNames=TRUE,rowNames=FALSE)
+   system(paste0("clean_up",show.output.on.console=TRUE,intern=FALSE)
+    }
   return(df)
 }
 
