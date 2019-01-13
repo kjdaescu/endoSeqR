@@ -21,10 +21,9 @@ Package_Load<-function(){
 #' generate_fasta
 #'
 #' This function generates custom, library-specific IDs for a list of sequences from a library.
-#' @param x - file of small RNA reads.
-#' @param source first author of the paper _ year
-#' @param library developmental stage or information
-#' @export fasta correctly formatted file with study-specific IDs
+#' @param x - file of small RNA reads. It can be have a "fastq/fq suffix", a "fasta/fa suffix", or a "txt" suffix with a list of sequences. Any file can be gzipped.
+#' @param desired name of file. Output file will be a fasta file, so the suffix ".fasta" is automatticaly added (example: "Desired_name.fasta")
+#' @export correctly formatted fasta file
 #' generate_fasta()
 
 generate_fasta<-function(x,library){
@@ -61,7 +60,7 @@ generate_fasta<-function(x,library){
 #' Map_endosiRNA
 #'
 #' This is internal function to get the bed files containing siRNA and it's genomic coordinates and ensuring length is 18-28 nts.
-#' @param file is the fasta file
+#' @param fasta_file_name is the fasta file
 #' @param index is the species prefix to direct bowtie to the correct index
 #' @export linux generates 2 files: file.siRNA.bed and file.siRNA.fasta.table
 #' Map_endosiRNA()
@@ -73,8 +72,9 @@ Map_endosiRNA<-function(index, fasta_file_name){
 
 #' Import_endosiRNA
 #'
-#' This is internal function to get the bed files containing siRNA and it's genomic coordinates and ensuring length is 18-28 nts.
-#' @param library
+#' This function produces the output xlsx and RData files that contains all endo-siRNA information
+#' @param fasta_file_name
+#' @export xlsx bed file, detailed data frame, and RData detailed endo-siRNA file
 #' Import_endosiRNA()
 
 Import_endosiRNA<-function(fasta_file_name){
@@ -102,15 +102,14 @@ Import_endosiRNA<-function(fasta_file_name){
   save(df,file=paste0(fasta_file_name,"_endosiRNA.RData"))
   write.xlsx(df,file=paste0(fasta_file_name,"detailed_endosiRNA.xlsx"),colNames=TRUE,rowNames=FALSE)
   write.xlsx(bed,file=paste0(fasta_file_name,"_endosiRNA_bed.xlsx"),colNames=TRUE,rowNames=FALSE)
-   system(paste0("clean_up",show.output.on.console=TRUE,intern=FALSE)
-    }
+  system(paste0("clean_up",show.output.on.console=TRUE,intern=FALSE)
   return(df)
 }
 
 
 #' PrepsiRNAntPlot
 #'
-#' This function generates leading base pair information
+#' This internal function generates leading base pair information
 #' @param x - bed file with endosiRNA and sequences
 #' PrepsiRNAntPlot()
 
@@ -131,8 +130,9 @@ PrepsiRNAntPlot<-function(x){
 
 #' HistBase1Plot
 #'
-#' This function generates leading base pair information for each size of endo-siRNA (18-28 base pairs)
+#' Thisinternal function generates leading base pair information for each size of endo-siRNA (18-28 base pairs)
 #' @param x - bed file with endosiRNA and sequences
+#' @export linux generates information for the leading base/length histogram and a data frame with the same information
 #' HistBase1Plot()
 
 HistBase1Plot<-function(x){
@@ -161,8 +161,6 @@ PlotNTLetter<-function(x){
   x$Sequence<-as.character(x$Sequence)
   x<-HistBase1Plot(x)
   print(t(x))
-  #plot.new()
-  #pdf(filename=paste0(y,".pdf"))
   barplot(t(x),
           col=c("firebrick1","darkorchid3","darkturquoise","blue","darkseagreen1"),
           names=rownames(x),
@@ -173,7 +171,6 @@ PlotNTLetter<-function(x){
   legend("topright",
          legend=c("G","C","U", "A"),
          col=c("darkseagreen1","blue","darkturquoise","darkorchid3"), pch=15)
-  #dev.off()
   return(t(x))
 }
 
