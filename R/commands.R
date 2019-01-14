@@ -123,8 +123,8 @@ PrepsiRNAntPlot<-function(x){
                       nrow(x[x$Leading.base %in% "C",]),
                       nrow(x[x$Leading.base %in% "G",]))
   colnames(y)<-c("N", "A","U", "C", "G")
-  print("leading base distribution")
-  print(y)
+  #print("leading base distribution")
+  #print(y)
   return(y)
 }
 
@@ -147,7 +147,7 @@ for (i in 1:length(siRNA_lengths)){
 }
   z<-as.matrix(x_all)
   rownames(z)<-c(18:28)
-  print(count(z))
+  #print(count(z))
   return(z)
 }
 
