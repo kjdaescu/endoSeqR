@@ -1,1 +1,8 @@
 
+The index files are bowtie builds from genome, non-coding RNA, and transcriptome fasta files available from ensembl. The files are too large to include here, so please find the index files here:
+
+https://drive.google.com/drive/folders/16xoPxbzVu9Zo9_gqF16umHO_swB91kxV
+
+If the C. elegans file is downloaded to this directory, the index listed in the practice exercise tutorial will work so that the practice dataset can be analyzed.
+
+
