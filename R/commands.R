@@ -1,6 +1,6 @@
 # Hello, endoSeqR!
 # This is a way to test that the package installed
-# which prints 'Hello, endoMatcheR!'.
+# which prints 'Hello, endoSeqR!'.
 
 
 hello_endoSeqR <- function() {
@@ -100,7 +100,7 @@ Import_endosiRNA<-function(fasta_file_name){
   sequence2<-unlist(sequence2[,1])
   df$target.mRNA<-sequence2
   save(df,file=paste0(fasta_file_name,"_endosiRNA.RData"))
-  write.xlsx(df,file=paste0(fasta_file_name,"detailed_endosiRNA.xlsx"),colNames=TRUE,rowNames=FALSE)
+  write.xlsx(df,file=paste0(fasta_file_name,"_detailed_endosiRNA.xlsx"),colNames=TRUE,rowNames=FALSE)
   write.xlsx(bed,file=paste0(fasta_file_name,"_endosiRNA_bed.xlsx"),colNames=TRUE,rowNames=FALSE)
   system(paste0("clean_up",show.output.on.console=TRUE,intern=FALSE))
   return(df)
