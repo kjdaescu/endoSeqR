@@ -1,6 +1,5 @@
 # endoSeqR
 Package to identify endo-siRNAs from small RNA 
 
-Coming soon: 
-1) endo_Indexes folder will include bowtie builds from several different species
-2) A practice folder that will include a practice dataset, a pdf tutorial walking through the procedure, and the expected output files
+1) endo_Indexes sub-folder includes instructions on obtaining index files needed for alignment. The index file folders for each species (elegans, musculus, rerio, etc.) should be dragged here.
+2) practice sub-folder will includes a practice dataset, a pdf tutorial walking through the procedure, and the expected output files.
