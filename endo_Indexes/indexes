@@ -3,6 +3,5 @@ The index files are bowtie builds from genome, non-coding RNA, and transcriptome
 
 https://drive.google.com/drive/folders/16xoPxbzVu9Zo9_gqF16umHO_swB91kxV
 
-If the C. elegans file is downloaded to this directory, the index listed in the practice exercise tutorial will work so that the practice dataset can be analyzed.
-
+To complete the tutorial in the practice folder, the elegans directory must be downloaded in this folder.
 
