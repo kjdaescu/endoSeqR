@@ -1,7 +1,9 @@
 
-The index files are bowtie builds from genome, non-coding RNA, and transcriptome fasta files available from ensembl. The files are too large to include here, so please find the index files here:
+The index files are bowtie builds from genome, non-coding RNA, and transcriptome fasta files available from ensembl. The files are too large to include and can be retrieved here:
 
 https://drive.google.com/drive/folders/16xoPxbzVu9Zo9_gqF16umHO_swB91kxV
 
-To complete the tutorial in the practice folder, the elegans directory must be downloaded in this folder.
+Alternatively, the genomic, ncRNA, and cDNA species fasta files can be downloaded from ensembl and bowtie build can be used to build the indexes.
+
+To complete the tutorial in the practice folder, either the elegans directory must be downloaded in this folder, are the indexes must be built in this folder.
 
