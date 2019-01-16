@@ -21,7 +21,7 @@ Package_Load<-function(){
 #' generate_fasta
 #'
 #' This function generates custom, library-specific IDs for a list of sequences from a library.
-#' @param x - file of small RNA reads. It can be have a "fastq/fq suffix", a "fasta/fa suffix", or a "txt" suffix with a list of sequences. Any file can be gzipped.
+#' @param x - file of small RNA reads. It can have a "fastq/fq suffix", a "fasta/fa suffix", or a "txt" suffix with a list of sequences. Any file can be gzipped.
 #' @param desired name of file. Output file will be a fasta file, so the suffix ".fasta" is automatticaly added (example: "Desired_name.fasta")
 #' @export correctly formatted fasta file
 #' generate_fasta()
@@ -130,7 +130,7 @@ PrepsiRNAntPlot<-function(x){
 
 #' HistBase1Plot
 #'
-#' Thisinternal function generates leading base pair information for each size of endo-siRNA (18-28 base pairs)
+#' This internal function generates leading base pair information for each size of endo-siRNA (18-28 base pairs)
 #' @param x - bed file with endosiRNA and sequences
 #' @export linux generates information for the leading base/length histogram and a data frame with the same information
 #' HistBase1Plot()
